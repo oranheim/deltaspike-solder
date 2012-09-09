@@ -1,0 +1,107 @@
+<assembly
+   xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0 http://maven.apache.org/xsd/assembly-1.1.0.xsd">
+
+   <id>distribution</id>
+
+   <formats>
+      <format>zip</format>
+   </formats>
+   
+   <baseDirectory>${project.build.finalName}-${project.version}</baseDirectory>
+
+   <!-- Add distribution files -->
+   <fileSets>
+      <fileSet>
+         <directory>src/main/assembly</directory>
+         <outputDirectory>.</outputDirectory>
+         <filtered>true</filtered>
+         <includes>
+            <include>readme.txt</include>
+            <include>license.txt</include>
+            <include>notice.txt</include>
+         </includes>
+      </fileSet>
+   </fileSets>
+
+   <dependencySets>
+      <!-- Add necessary binaries -->
+      <dependencySet>
+         <outputDirectory>artifacts</outputDirectory>
+         <useProjectArtifact>false</useProjectArtifact>
+         <includes>
+            <include>org.jboss.seam.international:seam-international-api</include>
+            <include>org.jboss.seam.international:seam-international</include>
+         </includes>
+         <excludes>
+            <exclude>org.jboss.seam.international:*:*:javadoc</exclude>
+            <exclude>org.jboss.seam.international:*:*:sources</exclude>
+         </excludes>
+         <outputFileNameMapping>${artifact.artifactId}${dashClassifier?}.${artifact.extension}</outputFileNameMapping>
+      </dependencySet>
+      
+      <!-- Add necessary dependencies -->
+      <dependencySet>
+         <outputDirectory>lib</outputDirectory>
+         <useProjectArtifact>false</useProjectArtifact>
+         <useTransitiveDependencies>true</useTransitiveDependencies>
+         <excludes>
+            <exclude>org.jboss.seam.international:*</exclude>
+            <exclude>org.jboss.seam.solder:seam-solder-api</exclude>
+         </excludes>
+         <outputFileNameMapping>${artifact.artifactId}${dashClassifier?}.${artifact.extension}</outputFileNameMapping>
+      </dependencySet>
+      
+      <!-- Pull in javadoc for api -->
+      <dependencySet>
+         <outputDirectory>doc/api</outputDirectory>
+         <unpack>true</unpack>
+         <useProjectArtifact>false</useProjectArtifact>
+         <includes>
+            <include>org.jboss.seam.international:seam-international-api:jar:javadoc</include>
+         </includes>
+      </dependencySet>
+      
+      <!-- Pull in docbook artifacts -->
+      <dependencySet>
+         <outputDirectory>doc/reference</outputDirectory>
+         <unpack>true</unpack>
+         <useProjectArtifact>false</useProjectArtifact>
+         <includes>
+            <include>org.jboss.seam.international:seam-international-reference-guide</include>
+         </includes>
+         <unpackOptions>
+            <excludes>
+               <exclude>META-INF/</exclude>
+            </excludes>
+         </unpackOptions>
+      </dependencySet>
+      
+      <!-- Pull in the timeanddate example -->
+      <dependencySet>
+         <outputDirectory>examples</outputDirectory>
+         <unpack>true</unpack>
+         <useProjectArtifact>false</useProjectArtifact>
+         <includes>
+            <include>org.jboss.seam.international:seam-international-example-timeanddate</include>
+         </includes>
+      </dependencySet>      
+      
+      <!-- Add the source -->
+      <dependencySet>
+         <outputDirectory>source</outputDirectory>
+         <unpack>true</unpack>
+         <useProjectArtifact>false</useProjectArtifact>
+         <includes>
+            <include>org.jboss.seam.international:seam-international-api:*:sources</include>
+            <include>org.jboss.seam.international:seam-international:*:sources</include>            
+         </includes>
+         <unpackOptions>
+            <excludes>
+               <exclude>META-INF/</exclude>
+            </excludes>
+         </unpackOptions>
+      </dependencySet>
+   </dependencySets>
+</assembly>

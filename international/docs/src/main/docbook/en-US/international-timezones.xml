@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+   "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" []>
+<chapter id="international.timezones">
+   <title>Timezones</title>
+   <para>
+      To support a more developer friendly way of handling TimeZones, in
+      addition to supporting JDK <literal>TimeZone</literal>,
+      we have added support for using Joda-Time through their
+      <literal>DateTimeZone</literal> class. Don't worry, it provides
+      convenience methods for converting to JDK <literal>TimeZone</literal>.
+   </para>
+   <section id="joda_time">
+      <title>Joda Time</title>
+      <para>
+         To activate Joda-Time for i18n within your project you will need to
+         add the following Maven dependency:
+      </para>
+      <programlisting role="XML"><![CDATA[<dependency>
+      <groupId>joda-time</groupId>
+      <artifactId>joda-time</artifactId>
+      <version>1.6</version>
+   </dependency>]]></programlisting>
+   </section>
+   <section id="defaulttz">
+      <title>Application TimeZone</title>
+      <para>
+         We have an Application time zone that is available with Joda-Time
+         (<literal>DateTimeZone</literal>) or the JDK (<literal>TimeZone</literal>)
+         that can be retrieved with
+      </para>
+      <programlisting role="JAVA"><![CDATA[@Inject
+private DateTimeZone applicationDateTimeZone;
+
+@Inject
+private TimeZone applicationTimeZone]]></programlisting>
+      <para>
+         It can also be accessed through EL by the name "defaultDateTimeZone" for Joda-Time
+         or "defaultTimeZone" for JDK!
+      </para>
+      <para>
+         By default the <literal>TimeZone</literal>
+         will be set to the JVM default, unless you produce
+         a String annotated with <literal>@DefaultTimeZone</literal>.
+         This can be achieved through either the Seam Config module or
+         any bean that <literal>@Produces</literal> a method or field that matches
+         the type and qualifier.
+      </para>
+		<para>
+			This will set the application time zone to be Tijuana:
+		</para>
+<programlisting role="JAVA"><![CDATA[@Produces
+@DefaultTimeZone
+private String defaultTimeZoneId = "America/Tijuana";]]></programlisting>
+   </section>
+   <section id="usertz">
+      <title>User TimeZone</title>
+      <para>
+         In addition to the Application time zone, there is also a time zone assigned
+         to each User Session.
+      </para>
+      <programlisting role="JAVA"><![CDATA[@Inject
+@Client
+private DateTimeZone userDateTimeZone;
+
+@Inject
+@Client
+private TimeZone userTimeZone;]]></programlisting>
+      <para>
+         It can also be accessed through EL using "userDateTimeZone" for Joda-Time
+         and "userTimeZone" for JDK.
+		</para>
+      <para>
+         By default the <literal>DateTimeZone</literal> and <literal>TimeZone</literal>
+         for a User Session is initialized to the same as the Application. However, changing
+         the User's <literal>DateTimeZone</literal> and <literal>TimeZone</literal>
+         is a simple matter of firing an event to update it. An example
+         would be
+      </para>
+      <programlisting role="JAVA"><![CDATA[@Inject
+@Client
+@Alter
+private Event<DateTimeZone> dtzEvent;
+
+@Inject
+@Client
+@Alter
+private Event<TimeZone> tzEvent;
+
+public void setUserDateTimeZone() {
+    DateTimeZone dtzTijuana = DateTimeZone.forID("America/Tijuana");
+    dtzEvent.fire(dtzTijuana);
+
+    TimeZone tzTijuana = TimeZone.getTimeZone("America/Tijuana");
+    tzEvent.fire(tzTijuana);
+}]]></programlisting>
+   </section>
+   <section id="availtz">
+      <title>Available TimeZones</title>
+      <para>
+         We've also provided a list of available TimeZones that can be accessed via
+      </para>
+      <programlisting role="JAVA"><![CDATA[@Inject
+private List<ForwardingDateTimeZone> dateTimeZones;
+
+@Inject
+private List<ForwardingTimeZone> timeZones;]]></programlisting>
+   </section>
+</chapter>

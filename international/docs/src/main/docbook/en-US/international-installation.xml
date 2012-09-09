@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+   "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" []>
+<chapter id="installation">
+	<title>Installation</title>
+	<para>
+		Most features of Seam International are installed automatically by including <literal>seam-international.jar</literal>
+		in the web application library folder. If you are using <ulink url="http://maven.apache.org/">Maven</ulink> as your 
+		build tool, you can add the following dependency to your <literal>pom.xml</literal> file:
+	</para>
+	<programlisting role="XML"><![CDATA[<dependency>
+	<groupId>org.jboss.seam.international</groupId>
+	<artifactId>seam-international</artifactId>
+	<version>${seam-international-version}</version>
+</dependency>]]></programlisting>	
+	<tip>
+		<para>Replace ${seam-international-version} with the most recent or appropriate version of Seam International.</para>			
+	</tip>
+
+</chapter>

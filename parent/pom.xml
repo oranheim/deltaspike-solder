@@ -104,6 +104,11 @@
                 <version>${jboss.logging.version}</version>
                 <scope>provided</scope>
             </dependency>
+            
+            
+            <!-- Commons deps -->
+            
+            
 
             <!-- Test deps -->
             <dependency>

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+
+   <parent>
+      <groupId>org.jboss.seam</groupId>
+      <artifactId>seam-parent</artifactId>
+      <version>20ds-SNAPSHOT</version>
+      <relativePath>../parent/pom.xml</relativePath>
+   </parent>
+
+   <groupId>org.jboss.seam.international</groupId>
+   <artifactId>seam-international-parent</artifactId>
+   <packaging>pom</packaging>
+   <version>3.5.0-SNAPSHOT</version>
+
+   <name>Seam International Module</name>
+   <description>A unified approach to configuring the language and locale of a CDI-based application</description>
+   <url>http://seamframework.org/Seam3/International</url>
+   <inceptionYear>2009</inceptionYear>
+
+   <modules>
+      <module>api</module>
+      <module>impl</module>
+      <module>testsuite</module>
+   </modules>
+
+   <properties>
+      <seam.version>3.5.0-SNAPSHOT</seam.version>
+   </properties>
+
+   <dependencyManagement>
+      <dependencies>
+
+         <dependency>
+            <groupId>org.jboss.seam</groupId>
+            <artifactId>seam-bom</artifactId>
+            <version>${seam.version}</version>
+            <scope>import</scope>
+            <type>pom</type>
+         </dependency>
+
+         <!-- Override submodule versions from org.jboss.seam:seam-bom -->
+         <dependency>
+            <groupId>org.jboss.seam.international</groupId>
+            <artifactId>seam-international-api</artifactId>
+            <version>${project.version}</version>
+         </dependency>
+
+         <dependency>
+            <groupId>org.jboss.seam.international</groupId>
+            <artifactId>seam-international</artifactId>
+            <version>${project.version}</version>
+            <scope>runtime</scope>
+         </dependency>
+
+
+      <dependency>
+         <groupId>javax.enterprise</groupId>
+         <artifactId>cdi-api</artifactId>
+         <scope>provided</scope>
+         <version>1.0-SP4</version>
+      </dependency>
+
+      <dependency>
+         <groupId>org.jboss.solder</groupId>
+         <artifactId>solder-impl</artifactId>
+         <scope>compile</scope>
+         <version>${solder.version}</version>
+      </dependency>
+
+      <dependency>
+         <groupId>org.jboss.solder</groupId>
+         <artifactId>solder-tooling</artifactId>
+         <optional>true</optional>
+         <version>${solder.version}</version>
+      </dependency>
+
+      <dependency>
+         <groupId>com.ocpsoft</groupId>
+         <artifactId>ocpsoft-pretty-time</artifactId>
+         <optional>true</optional>
+         <version>1.0.7</version>
+      </dependency>
+
+      <dependency>
+         <groupId>joda-time</groupId>
+         <artifactId>joda-time</artifactId>
+         <optional>true</optional>
+         <version>2.1</version>
+      </dependency>
+
+      </dependencies>
+   </dependencyManagement>
+
+   <build>
+      <pluginManagement>
+         <plugins>
+            <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+            <plugin>
+               <groupId>org.eclipse.m2e</groupId>
+               <artifactId>lifecycle-mapping</artifactId>
+               <version>1.0.0</version>
+               <configuration>
+                  <lifecycleMappingMetadata>
+                     <pluginExecutions>
+                        <pluginExecution>
+                           <pluginExecutionFilter>
+                              <groupId>org.codehaus.mojo</groupId>
+                              <artifactId>
+                                 build-helper-maven-plugin
+                              </artifactId>
+                              <versionRange>[1.5,)</versionRange>
+                              <goals>
+                                 <goal>parse-version</goal>
+                                 <goal>maven-version</goal>
+                              </goals>
+                           </pluginExecutionFilter>
+                           <action>
+                              <ignore />
+                           </action>
+                        </pluginExecution>
+                     </pluginExecutions>
+                  </lifecycleMappingMetadata>
+               </configuration>
+            </plugin>
+         </plugins>
+      </pluginManagement>
+   </build>
+
+   <profiles>
+      <profile>
+         <id>distribution</id>
+         <activation>
+            <property>
+               <name>release</name>
+            </property>
+         </activation>
+         <modules>
+            <module>docs</module>
+            <module>dist</module>
+         </modules>
+      </profile>
+   </profiles>
+
+   <scm>
+      <connection>scm:git:git://github.com/seam/international.git</connection>
+      <developerConnection>scm:git:git@github.com:seam/international.git</developerConnection>
+      <url>http://github.com/seam/international</url>
+   </scm>
+
+   <issueManagement>
+      <system>JIRA</system>
+      <url>http://issues.jboss.org/browse/SEAMINTL</url>
+   </issueManagement>
+
+   <ciManagement>
+      <system>Jenkins</system>
+      <url>https://seam.ci.cloudbees.com/job/Seam_International</url>
+   </ciManagement>
+
+   <developers>
+      <developer>
+         <name>Ken Finnigan</name>
+         <email>ken@kenfinnigan.me</email>
+         <timezone>EST</timezone>
+         <roles>
+            <role>Project Lead</role>
+         </roles>
+      </developer>
+      <developer>
+         <name>Lincoln Baxter, III</name>
+         <email>lincolnbaxter@gmail.com</email>
+         <url>http://ocpsoft.com</url>
+         <organization>JBoss, by Red Hat</organization>
+         <organizationUrl>http://jboss.org</organizationUrl>
+         <timezone>EST</timezone>
+         <roles>
+            <role>Committer</role>
+         </roles>
+      </developer>
+   </developers>
+
+</project>

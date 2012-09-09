@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+   "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" []>
+<chapter id="international.locales">
+	<title>Locales</title>
+	<section id="defaultlc">
+		<title>Application Locale</title>
+		<para>
+			In a similar fashion to TimeZones we have an Application <literal>Locale</literal>:
+		</para>
+<programlisting role="JAVA"><![CDATA[@Inject
+private java.util.Locale lc;]]></programlisting>
+		<para>
+			accessible via EL with "defaultLocale".
+		</para>
+		<para>
+			By default the <literal>Locale</literal> will be set to the JVM default, unless you
+         produce a String annotated with <literal>@DefaultLocale</literal>.  This can be achieved
+         through either the Seam Config module, with any bean that <literal>@Produces</literal>
+         a method or field that matches the type and qualifier.
+		</para>
+		<para>
+			This will set the application language to be English with the country of US:
+		</para>
+<programlisting role="JAVA"><![CDATA[@Produces
+@DefaultLocale
+private String defaultLocaleKey = "en_US";]]></programlisting>
+		<para>
+			As you can see from the previous example, you can define the <literal>Locale</literal> with 
+			<literal>lang_country_variant</literal>.  It's important to note that the first two parts of the locale definition
+			are not expected to be greater than 2 characters otherwise an error will be produced
+         and it will default to the JVM <literal>Locale</literal>.
+		</para>
+	</section>
+	<section id="userlc">
+		<title>User Locale</title>
+		<para>The Locale associated with the User Session can be retrieved by:</para>
+<programlisting role="JAVA"><![CDATA[@Inject
+@Client
+private java.util.Locale locale;]]></programlisting>
+		<para>
+			which is EL accessible via <literal>userLocale</literal>.
+		</para>
+		<para>
+			By default the <literal>Locale</literal> will be that of the Application when the User Session
+         is initialized.  However, changing the User's <literal>Locale</literal> is a simple
+			matter of firing an event to update it.  An example would be:
+		</para>
+<programlisting role="JAVA"><![CDATA[@Inject
+@Client
+@Alter
+private Event<java.util.Locale> localeEvent;
+ 
+public void setUserLocale() {
+    Locale canada = Locale.CANADA;
+    localeEvent.fire(canada);
+}]]></programlisting>
+	</section>
+	<section id="availlc">
+		<title>Available Locales</title>
+		<para>
+			We've also provided a list of available Locales that can be accessed via:
+		</para>
+<programlisting role="JAVA"><![CDATA[@Inject
+private List<java.util.Locale> locales;]]></programlisting>
+		<para>
+			The locales that will be returned as available can be defined by extending <literal>LocaleConfiguration</literal>.
+         As seen here:
+		</para>
+<programlisting role="JAVA"><![CDATA[public class CustomLocaleConfiguration extends LocaleConfiguration {
+    @PostConstruct
+    public void setup() {
+        addSupportedLocaleKey("en");
+        addSupportedLocaleKey("fr");
+    }
+}]]></programlisting>
+	</section>
+</chapter>

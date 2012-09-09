@@ -31,6 +31,7 @@
         <module>servlet</module>
         <module>solder</module>
 
+        <module>international</module>
         <module>mail</module>
     </modules>
 
