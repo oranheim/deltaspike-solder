@@ -21,13 +21,10 @@ import org.jboss.solder.messages.Locale;
 import org.jboss.solder.messages.Message;
 import org.jboss.solder.messages.MessageBundle;
 
-// todo: look into params in solder logging
-
-//@MessageBundle
+@MessageBundle
 public interface RegistrationStatusMessages {
-//    @Status
-//    //@Message("Username {0} is already taken. Please choose another.")
-//    @Message("Username {0} is already taken. Please choose another.")
-//    @Locale("en_US")
-    String duplicateUsername(String username);
+	@Status
+	@Message("Username %s is already taken. Please choose another.")
+	@Locale("en_US")
+	String duplicateUsername(String username);
 }

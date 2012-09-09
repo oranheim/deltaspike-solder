@@ -1,1 +1,2 @@
-- look into RegistrationStatusMessages, which doesn't compile correctly
++ look into RegistrationStatusMessages, which doesn't compile correctly (done 2012-09-09)
+
