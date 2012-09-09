@@ -1,0 +1,103 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+   <parent>
+      <groupId>org.jboss.seam.conversation</groupId>
+      <artifactId>seam-conversation</artifactId>
+      <version>3.5.0-SNAPSHOT</version>
+   </parent>
+   <artifactId>seam-conversation-weld</artifactId>
+   <packaging>jar</packaging>
+   <name>Seam Conversation Weld</name>
+
+   <dependencies>
+      <dependency>
+         <groupId>org.jboss.seam.conversation</groupId>
+         <artifactId>seam-conversation-spi</artifactId>
+      </dependency>
+
+       <dependency>
+           <groupId>org.jboss.spec.javax.servlet</groupId>
+           <artifactId>jboss-servlet-api_3.0_spec</artifactId>
+           <version>1.0.0.Final</version>
+       </dependency>
+
+      <dependency>
+         <groupId>org.jboss.weld</groupId>
+         <artifactId>weld-api</artifactId>
+         <scope>provided</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>org.jboss.weld</groupId>
+         <artifactId>weld-core</artifactId>
+         <scope>provided</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>org.jboss.weld.servlet</groupId>
+         <artifactId>weld-servlet-test-base</artifactId>
+         <scope>test</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>org.jboss.seam.conversation</groupId>
+         <artifactId>seam-conversation-spi</artifactId>
+         <type>test-jar</type>
+         <scope>test</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>org.jboss.arquillian.container</groupId>
+         <artifactId>arquillian-tomcat-embedded-6</artifactId>
+	       <version>${arquillian.tomcat.version}</version>
+         <scope>test</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>org.apache.tomcat</groupId>
+         <artifactId>catalina</artifactId>
+         <scope>test</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>org.apache.tomcat</groupId>
+         <artifactId>coyote</artifactId>
+         <scope>provided</scope>
+      </dependency>
+
+      <!-- Make sure this comes before Tomcat's EL on the classpath -->
+      <dependency>
+         <groupId>org.glassfish.web</groupId>
+         <artifactId>el-impl</artifactId>
+         <scope>test</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>org.apache.tomcat</groupId>
+         <artifactId>jasper</artifactId>
+         <scope>provided</scope>
+         <exclusions>
+            <exclusion>
+               <groupId>org.apache.tomcat</groupId>
+               <artifactId>el-api</artifactId>
+            </exclusion>
+         </exclusions>
+      </dependency>
+
+      <!-- Weld servlet, EL and JSP required for testing CDI injections -->
+      <dependency>
+         <groupId>org.jboss.weld.servlet</groupId>
+         <artifactId>weld-servlet-core</artifactId>
+         <scope>test</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>org.slf4j</groupId>
+         <artifactId>slf4j-jdk14</artifactId>
+         <scope>test</scope>
+      </dependency>
+
+   </dependencies>
+
+</project>
+

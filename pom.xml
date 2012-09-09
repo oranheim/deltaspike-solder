@@ -33,6 +33,7 @@
 
         <module>international</module>
         <module>mail</module>
+        <module>conversation</module>
     </modules>
 
 </project>

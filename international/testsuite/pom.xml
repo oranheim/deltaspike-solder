@@ -204,7 +204,7 @@
             <activation>
                 <property>
                     <name>arquillian</name>
-                    <value>jbossas-remote-7</value>
+                    <value>jbossas-remote-7</value>                    
                 </property>
             </activation>
 
