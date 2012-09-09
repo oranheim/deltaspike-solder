@@ -1,0 +1,2 @@
+org.jboss.solder.messages.TypedMessageBundleExtension
+org.jboss.solder.logging.TypedMessageLoggerExtension

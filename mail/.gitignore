@@ -1,0 +1,7 @@
+target
+.classpath
+.project
+.settings
+transaction.log
+testsuite/velocity.log
+**/*/src/main/java/META-INF

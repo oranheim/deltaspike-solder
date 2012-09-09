@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<chapter id="mail-core">
+   <title>Core Usage</title>
+  
+   <section>
+      <title>Intro</title>
+      <para>
+         While Seam Mail does provide methods to produce templated email, there
+         is a core set of functionality that is shared whether you use a templating
+         engine or not.
+	  </para>
+   </section>
+   
+   <section>
+      <title>Contacts</title>
+      
+      <para>
+         At it's base an email consists of various destinations and content. Seam
+         Mail provides a wide varerity of methods of ways to configure the following
+         address fields
+	  </para>
+	  
+	  <itemizedlist>
+	      <listitem>
+	         <para>From</para>
+	      </listitem>
+	      <listitem>
+	         <para>To</para>
+	      </listitem>
+	      <listitem>
+	         <para>CC</para>
+	      </listitem>
+	      <listitem>
+	         <para>BCC</para>
+	      </listitem>
+	      <listitem>
+	         <para>REPLY-TO</para>
+	      </listitem>
+      </itemizedlist>
+      
+      <section>
+      	<title>String Based</title>
+      	
+      	<para>
+      		Seam Mail leverages the JavaMail InternetAddress object internally for parsing
+      		and storage and provides a varargs method for each of the contact types. Thus
+      		you can provide either a String, multiple Strings or a String []. Addresses are
+      		parsed as RFC 822 addresses and can be a valid Email Address or a Name + Email Address.    	
+      	</para>
+      	
+      	<programlisting role="JAVA"><![CDATA[
+		MailMessage m = mailMessage.get();
+		m.from("John Doe<john@test.com>")
+		.to("jane@test.com")
+		.cc("Dan<dan@test.com", "bill@test.com")]]>
+		</programlisting>
+      	
+      </section>
+      
+      <section>
+      	<title>InternetAddress</title>
+      	
+      	<para>
+      		Since we leverage standard InternetAddress object we might as well provide
+      		a method to use it. 	
+      	</para>
+      	
+      	<programlisting role="JAVA"><![CDATA[
+		MailMessage m = mailMessage.get();
+		m.from(new InternetAddress("John Doe<john@test.com>"))]]>
+		</programlisting>
+      	
+      </section>
+      
+      <section>
+      	<title>EmailContact</title>
+      	
+      	<para>
+      		Since applications frequently have their own object to represent a user who
+      		will have an email set to them we provide a simple interface which your object
+      		can implement.	
+      	</para>
+      	
+      	<programlisting role="JAVA"><![CDATA[
+		public interface EmailContact {		
+    	   public String getName();
+
+           public String getAddress();
+         }]]>
+		</programlisting>
+		
+		<para>Let's define this interface on an example user entity</para>
+		
+		<programlisting role="JAVA"><![CDATA[
+		@Entity
+		public class User implements EmailContact {		
+    	   
+    	   private String username; //"john@test.com"
+    	   private String firstName; //"John"
+    	   private String lastName; //"Doe"
+    	   
+    	   public String getName() {
+    	      return firstName + " " + lastName;
+    	   }
+
+           public String getAddress() {
+              return username;
+           }
+        }]]>
+		</programlisting>
+		
+		<para>Now we can use our User object directly in an of the contact methods</para>
+      	
+      	<programlisting role="JAVA"><![CDATA[      	
+      	User user;
+      	
+		MailMessage m = mailMessage.get();
+		m.from("John Doe<john@test.com>");
+		m.to(user);]]>
+		</programlisting>
+      	
+      </section>
+      
+      <section>
+      	<title>Content</title>
+      	<para>Adding content to a message is simply a matter of calling the appropriate method</para>
+      	
+      	<para>For plain text body</para>
+      	<programlisting role="JAVA"><![CDATA[      	      	
+		MailMessage m = mailMessage.get();
+		m.bodyText("This is the body of my message");]]>
+		</programlisting>
+		
+		<para>For HTML body</para>
+      	<programlisting role="JAVA"><![CDATA[      	      	
+		MailMessage m = mailMessage.get();
+		m.bodyHtml("This is the <b>body</b> of my message");]]>
+		</programlisting>
+		
+		<para>For HTML + plain text alternative body</para>
+      	<programlisting role="JAVA"><![CDATA[      	      	
+		MailMessage m = mailMessage.get();
+		m.bodyHtmlTextAlt("This is the <b>body</b> of my message", "This is a plain text alternative");]]>
+		</programlisting>
+      	
+      </section>
+      
+      <section>
+      	<title>Attachments</title>
+      	<para>Attachments can be added using a few different implementations of the EmailAttachment.java interface</para>
+      	
+      	<itemizedlist>
+	      <listitem>
+	         <para>BaseAttachment.java: byte[]</para>
+	      </listitem>
+	      <listitem>
+	         <para>InputStreamAttachment.java: java.io.InputStream</para>
+	      </listitem>
+	      <listitem>
+	         <para>FileAttachment.java: java.io.File</para>
+	      </listitem>	      
+	      <listitem>
+	         <para>URLAttachment.java: Loads attachment from URL</para>
+	      </listitem>
+      	</itemizedlist>
+      
+      <para>
+      	Attachments are added by providing the relevant information per implementations as well as a ContentDisposition which
+      	specifics if the attachment is simply "ATTACHMENT" or "INLINE" which allows the attachment to be referenced in the body 
+      	when using templating
+      </para>
+      	<programlisting role="JAVA"><![CDATA[      	      	
+		MailMessage m = mailMessage.get();
+		m.addAttachment(new FileAttachment(ContentDispostion.ATTACHMENT, new File("myFile"));]]>
+		</programlisting>
+		
+		<para>Here is how to reference an attachment inline. Inline attachments are referenced by their filename.</para>
+		
+		<programlisting role="HTML"><![CDATA[
+		<html xmlns="http://www.w3.org/1999/xhtml">
+			<body>
+				<p><b>Dear <a href="mailto:$person.email">$person.name</a>,</b></p>
+				<p>This is an example <i>HTML</i> email sent by $version and Velocity.</p>
+				<p><img src="$mailContext.insert("seamLogo.png")" /></p>
+				<p>It has an alternative text body for mail readers that don't support html.</p>
+			</body>
+		</html>]]>
+		</programlisting>
+      	
+      </section>
+	  
+   </section>
+<!--
+vim:et:ts=3:sw=3:tw=120
+-->    
+</chapter>

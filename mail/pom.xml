@@ -1,0 +1,160 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.jboss.seam</groupId>
+        <artifactId>seam-parent</artifactId>
+        <version>20ds-SNAPSHOT</version>
+        <relativePath>../parent/pom.xml</relativePath>
+    </parent>
+
+    <groupId>org.jboss.seam.mail</groupId>
+    <artifactId>seam-mail-parent</artifactId>
+    <packaging>pom</packaging>
+    <version>3.5-SNAPSHOT</version>
+    <name>Seam Mail Module</name>
+
+    <properties>
+        <freemarker.version>2.3.16</freemarker.version>
+        <velocity.version>1.7</velocity.version>
+    </properties>
+
+    <modules>
+        <module>api</module>
+        <module>impl</module>
+        <module>testsuite</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <dependency>
+                <groupId>org.jboss.seam</groupId>
+                <artifactId>seam-bom</artifactId>
+                <version>${project.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jboss.solder</groupId>
+                <artifactId>solder-logging</artifactId>
+                <version>${seam.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+
+            <!-- Override versions from seam-bom for this module's artifacts -->
+            <dependency>
+                <groupId>org.jboss.seam.mail</groupId>
+                <artifactId>seam-mail-api</artifactId>
+                <version>${project.version}</version>
+                <scope>compile</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jboss.seam.mail</groupId>
+                <artifactId>seam-mail</artifactId>
+                <version>${project.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+
+            <dependency>
+              <groupId>org.apache.velocity</groupId>
+              <artifactId>velocity</artifactId>
+              <version>${velocity.version}</version>              
+              <scope>provided</scope>              
+              <optional>true</optional>
+            </dependency>
+
+            <dependency>
+              <groupId>org.freemarker</groupId>
+              <artifactId>freemarker</artifactId>
+              <version>${freemarker.version}</version>
+              <scope>provided</scope>
+              <optional>true</optional>
+            </dependency>
+            
+        </dependencies>
+
+    </dependencyManagement>
+
+    <!-- Dependencies common to the api and implementation(s) -->
+    <dependencies>
+        <dependency>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+            <version>1.0-SP4</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>activation</artifactId>
+            <version>1.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>r07</version>
+        </dependency>
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>distribution</id>
+            <activation>
+                <property>
+                    <name>release</name>
+                </property>
+            </activation>
+            <modules>
+                <!--<module>examples/sendmail</module>-->
+                <module>docs</module>
+                <module>dist</module>
+            </modules>
+        </profile>
+
+    </profiles>
+
+    <scm>
+        <connection>scm:git:git://github.com/seam/mail.git</connection>
+        <developerConnection>scm:git:git@github.com:seam/mail.git</developerConnection>
+        <url>http://github.com/seam/mail</url>
+    </scm>
+
+    <issueManagement>
+        <system>JIRA</system>
+        <url>http://issues.jboss.org/browse/SEAMMAIL</url>
+    </issueManagement>
+
+    <ciManagement>
+        <system>Hudson</system>
+        <url>http://hudson.jboss.org/hudson/view/Seam/job/Seam-3.X-mail-CI</url>
+    </ciManagement>
+
+    <developers>
+        <developer>
+            <name>Cody Lerum</name>
+            <url>http://community.jboss.org/people/clerum</url>
+            <timezone>MST</timezone>
+            <roles>
+                <role>Project Lead</role>
+            </roles>
+        </developer>
+        <developer>
+            <name>Jason Porter</name>
+            <url>http://community.jboss.org/people/lightguard</url>
+            <timezone>MST</timezone>
+            <roles>
+                <role>Contributor</role>
+            </roles>
+        </developer>
+    </developers>
+
+</project>
