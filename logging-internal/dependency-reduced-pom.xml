@@ -10,7 +10,7 @@
   <groupId>org.jboss.solder</groupId>
   <artifactId>solder-logging-internal</artifactId>
   <name>Solder Logging Internal</name>
-  <version>3.5-SNAPSHOT</version>
+  <version>3.5.0-SNAPSHOT</version>
   <url>${project.parent.url}</url>
   <build>
     <finalName>solder-logging-internal</finalName>

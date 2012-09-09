@@ -14,8 +14,8 @@
         <project.build.resourcesEncoding>ISO-8859-1</project.build.resourcesEncoding>
         <weld.version>1.1.9.Final</weld.version>
         <deltaspike.version>0.3-incubating</deltaspike.version>
-        <solder.version>3.5-SNAPSHOT</solder.version>
-        <seam.version>3.5-SNAPSHOT</seam.version>
+        <solder.version>3.5.0-SNAPSHOT</solder.version>
+        <seam.version>3.5.0-SNAPSHOT</seam.version>
         <junit.version>4.8.1</junit.version>
         <version.arquillian>1.0.2.Final</version.arquillian>
         <version.shrinkwrap_resolver>1.0.0-beta-7</version.shrinkwrap_resolver>
