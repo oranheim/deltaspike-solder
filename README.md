@@ -51,6 +51,7 @@ Disclaimer
 * Solder was forked on 2012-09-02 16:58 GMT+1
 * Seam Mail was forked on 2012-09-08 13:57 GMT+1
 * Seam International was forked on 2012-09-09 21:59 GMT+1
+* Seam Remoting was forked on 2012-09-10 00:12 GMT+1
 
 Enjoy!
 
