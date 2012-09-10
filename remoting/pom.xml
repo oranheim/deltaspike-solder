@@ -1,0 +1,134 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+
+   <parent>
+      <artifactId>seam-parent</artifactId>
+      <groupId>org.jboss.seam</groupId>
+      <version>20ds-SNAPSHOT</version>
+      <relativePath>../parent/pom.xml</relativePath>
+   </parent>
+
+   <groupId>org.jboss.seam.remoting</groupId>
+   <artifactId>seam-remoting-parent</artifactId>
+   <packaging>pom</packaging>
+   <version>3.5.0-SNAPSHOT</version>
+   <name>Seam Remoting Parent</name>
+   <url>http://www.seamframework.org/Seam3/RemotingModule</url>
+
+   <modules>
+      <module>impl</module>
+   </modules>
+   
+   <properties>
+      <seam.version>3.5.0-SNAPSHOT</seam.version>
+   </properties>
+
+   <dependencyManagement>
+      <dependencies>
+
+         <dependency>
+            <groupId>org.jboss.seam</groupId>
+            <artifactId>seam-bom</artifactId>
+            <version>${seam.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+         </dependency>
+
+         <!-- Override sub-module versions from org.jboss.seam:seam-bom -->
+         <dependency>
+            <groupId>org.jboss.seam.remoting</groupId>
+            <artifactId>seam-remoting</artifactId>
+            <version>${project.version}</version>
+         </dependency>
+
+         <!--dependency>
+            <groupId>javax.el</groupId>
+            <artifactId>el-api</artifactId>
+            <version>2.2</version>
+            <scope>provided</scope>
+         </dependency-->
+
+         <dependency>
+            <groupId>org.jboss.seam.conversation</groupId>
+            <artifactId>seam-conversation-weld</artifactId>
+            <version>3.0.0.CR1</version>
+         </dependency>
+
+
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <scope>provided</scope>
+            <version>1.0.0.GA</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+            <scope>provided</scope>
+            <version>1.0-SP4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>dom4j</groupId>
+            <artifactId>dom4j</artifactId>
+            <scope>provided</scope>
+            <version>1.6.1</version>
+        </dependency>
+
+        <dependency>
+            <!-- Required until the Servlet 3.0 API can be resolved in Central -->
+            <groupId>org.jboss.spec.javax.servlet</groupId>
+            <artifactId>jboss-servlet-api_3.0_spec</artifactId>
+            <scope>provided</scope>
+            <version>1.0.2.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.solder</groupId>
+            <artifactId>solder-impl</artifactId>
+            <scope>compile</scope>
+            <version>${solder.version}</version>
+        </dependency>
+
+        <dependency>
+           <groupId>org.jboss.seam.international</groupId>
+           <artifactId>seam-international</artifactId>
+           <optional>true</optional>
+           <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.seam.conversation</groupId>
+            <artifactId>seam-conversation-spi</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+      </dependencies>
+   </dependencyManagement>
+
+   <profiles>
+      <profile>
+         <id>distribution</id>
+         <activation>
+            <property>
+               <name>release</name>
+            </property>
+         </activation>
+         <modules>
+            <module>dist</module>
+            <module>docs</module>
+            <module>examples/helloworld</module>
+            <module>examples/model</module>
+            <module>examples/validation</module>
+         </modules>
+      </profile>
+   </profiles>
+
+   <scm>
+      <connection>scm:git:git://github.com/seam/remoting.git</connection>
+      <developerConnection>scm:git:git@github.com:seam/remoting.git</developerConnection>
+      <url>http://github.com/seam/remoting</url>
+   </scm>
+
+</project>

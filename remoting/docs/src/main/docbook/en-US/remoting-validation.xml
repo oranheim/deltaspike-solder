@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+
+<chapter id="remoting-validation">
+  <title>Seam Remoting - Bean Validation</title>
+  
+  <para>Seam Remoting provides integrated support for JSR-303 Bean Validation, which defines a standard approach for validating
+     Java Beans no matter where they are used; web tier or persistence tier, server or client.  Bean validation for remoting 
+     delivers JSR-303's vision by making all of the validation constraints declared by the server-side beans available on the 
+     client side, and allows developers to perform client-side bean validation in an easy to use, consistent fashion.
+  </para>
+  
+  <para>
+    Client-side validation by its very nature is an asynchronous operation, as it is possible that the client may encounter
+    a custom validation constraint for which it has no knowledge of the corresponding validation logic.  Under these circumstances,
+    the client will make a request to the server for the validation to be performed server-side, after which it receives 
+    the result will forward it to the client-side callback method.  All built-in validation types defined by the JSR-303
+    specification are executed client-side without requiring a round-trip to the server.  It is also possible to provide
+    the client-side validation API with custom JavaScript to allow client-side execution of custom validations.
+  </para>
+  
+  <section>
+    <title>Validating a single object</title>
+    
+    <para>
+      The <literal>Seam.validateBean()</literal> method may be used to validate a single object.  It accepts
+      the following parameter values:
+    </para>
+
+    <programlisting language="JavaScript"><![CDATA[  Seam.validateBean(bean, callback, groups);]]></programlisting>
+    
+    <para>
+      The <literal>bean</literal> parameter is the object to validate.
+    </para>
+    
+    <para>The <literal>callback</literal> parameter should contain a reference to the callback method to 
+      invoke once validation is complete.
+    </para>
+    
+    <para>The <literal>groups</literal> parameter is optional, however may be specified if only certain validation groups
+      should be validated.  The <literal>groups</literal> parameter may be a <literal>String</literal> or an array
+      of <literal>String</literal> values for when multiple groups are to be validated.
+    </para>
+    
+    <para>
+      Here's an example showing how a bean called <literal>customer</literal> is validated:
+    </para>
+    
+    <programlisting language="JavaScript"><![CDATA[  function test() {
+    var customer = Seam.createBean("com.acme.model.Customer");
+    customer.setFirstName("John");
+    customer.setLastName("Smith");
+    Seam.validateBean(customer, validationCallback);
+  }
+  
+  function validationCallback(violations) {
+    if (violations.length == 0) alert("All validations passed!");
+  }]]></programlisting>
+  
+    <tip>
+      <para>By default, when Seam Remoting performs validation for a single bean it will traverse the entire object
+        graph for that bean and validate each unique object that it finds.  If you don't wish to validate the entire object
+        graph, then please refer to the section on validating multiple objects later in this chapter for an alternative.      
+      </para>
+    </tip>
+
+  </section>
+  
+  <section>
+    <title>Validating a single property</title>
+    
+    <para>Sometimes it might not be desirable to perform validation for all properties of a bean.  For example, you might
+      have a dynamic form which displays validation errors as the user tabs between fields.  In this situation, you may use
+      the <literal>Seam.validateProperty()</literal> method to validate a single bean property.
+    </para>
+
+    <programlisting language="JavaScript">Seam.validateProperty(bean, property, callback, groups)<![CDATA[]]></programlisting>
+
+    <para>The <literal>bean</literal> parameter is the object containing the property that is to be validated.</para>
+    
+    <para>The <literal>property</literal> parameter is the name of the property to validate.</para>
+    
+    <para>The <literal>callback</literal> parameter is a reference to the callback function to invoke once the property has
+       been validated.
+    </para>   
+    
+    <para>The <literal>groups</literal> parameter is optional, however may be specified if validating the property against
+      a certain validation group.  The <literal>groups</literal> parameter may be a <literal>String</literal> or an array
+      of <literal>String</literal> values for multiple groups.
+    </para>    
+    
+    <para>
+      Here's an example showing how to validate the <literal>firstName</literal> property of a bean called 
+      <literal>customer</literal>:
+    </para>
+    
+    <programlisting language="JavaScript"><![CDATA[  function test() {
+    var customer = Seam.createBean("com.acme.model.Customer");
+    customer.setFirstName("John");
+    Seam.validateProperty(customer, "firstName", validationCallback);
+  }
+  
+  function validationCallback(violations) {
+    if (violations.length == 0) alert("All validations passed!");
+  }]]></programlisting>     
+
+  </section>
+  
+  <section>
+    <title>Validating multiple objects and/or properties</title>    
+    
+    <para>
+      It is also possible to perform multiple validations for beans and bean properties in one go.  This might be useful 
+      for example to perform validation of forms that present data from more than one bean.  
+      The <literal>Seam.validate()</literal> method takes the following parameters:
+    </para>
+    
+    <programlisting language="JavaScript"><![CDATA[
+      Seam.validate(validations, callback, groups);
+    ]]></programlisting>    
+    
+    <para>
+      The <literal>validations</literal> parameter should contain a list of the validations to perform.  It may either 
+      be an associative array (for a single validation), or an array of associative arrays (for multiple validations)
+      which define the validations that should be performed.  We'll look at this parameter more closely in just a moment.
+    </para>
+      
+    <para>The <literal>callback</literal> parameter should contain a reference to the callback function to invoke once
+      validation is complete.  The optional <literal>groups</literal> parameter should contain the group name/s
+      for which to perform validation.
+    </para>
+    
+    <para>The <literal>groups</literal> parameter allows one or more validation groups (specified by providing a 
+      <literal>String</literal> or array of <literal>String</literal> values) to be validated.  The validation groups
+      specified here will be applied to all bean values contained in the <literal>validations</literal> parameter.
+    </para>
+    
+    <para>The simplest example, in which we wish to validate a single object would look like this:</para>
+    
+    <programlisting language="JavaScript"><![CDATA[  Seam.validate({bean:customer}, callback);]]></programlisting>
+    
+    <para>
+      In the above example, validation will be performed for the <literal>customer</literal> object, after which
+      the function named <literal>validationCallback</literal> will be invoked.
+    </para>
+    
+    <para>Validate multiple beans is done by passing in an array of validations:</para>
+    
+    <programlisting language="JavaScript"><![CDATA[  Seam.validate([{bean:customer}, {bean:order}], callback);]]></programlisting>
+    
+    <para>
+      Single properties can be validated by specifying a <literal>property</literal> name:
+    </para>
+    
+    <programlisting language="JavaScript"><![CDATA[  Seam.validate({bean:customer, property: "firstName"}, callback);]]></programlisting>
+    
+    <para>
+      To prevent the entire object graph from being validated, the <literal>traverse</literal> property may be set to <literal>false</literal>:      
+    </para>
+    
+    <programlisting language="JavaScript"><![CDATA[  Seam.validate({bean:customer, traverse: false}, callback);]]></programlisting>
+    
+    <para>
+      Validation groups may also be set for each individual validation, by setting the <literal>groups</literal> property to a 
+      <literal>String</literal> or array of <literal>String</literal>s value:
+    </para>
+    
+    <programlisting language="JavaScript"><![CDATA[  Seam.validate({bean:customer, groups: "default"}, callback);]]></programlisting>
+  </section>
+  
+  <section>
+    <title>Validation groups</title>
+    
+    <para>
+      Validation group names should be the unqualified class name of the group class.  For example, for the class
+      <literal>com.acme.InternalRegistration</literal>, the client-side group name should be specified as
+      <literal>InternalRegistration</literal>:
+    </para>
+    
+    <programlisting><![CDATA[  Seam.validateBean(user, callback, "InternalRegistration"]]></programlisting>
+    
+    <para>
+      It is also possible to set the default validation groups against which all validations will be performed,
+      by setting the <literal>Seam.ValidationGroups</literal> property:      
+    </para>
+    
+    <programlisting><![CDATA[  Seam.ValidationGroups = ["Default", "ExternalRegistration"];]]></programlisting>
+    
+    <para>
+      If no explicit group is set for the default, and no group is specified when performing validation, then
+      the validation process will be executed against the 'Default' group.
+    </para>
+  </section>
+
+  <section>
+    <title>Handling validation failures</title>
+    
+    <para>
+      If any validations fail during the validation process, then the callback method specified in the
+      validation function will be invoked with an array of constraint violations.  If all validations pass,
+      this array will be empty.  Each object in the array represents a single constraint violation, and
+      contains the following property values:
+    </para>
+    
+    <para>
+      <literal>bean</literal> - the bean object for which the validation failed.
+    </para>
+    
+    <para>
+      <literal>property</literal> - the name of the property that failed validation
+    </para>
+    
+    <para>
+      <literal>value</literal> - the value of the property that failed validation
+    </para>
+    
+    <para>
+      <literal>message</literal> - a message string describing the nature of the validation failure
+    </para>
+    
+    <para>
+      The callback method should contain business logic that will process the constraint violations and update
+      the user interface accordingly to inform the user that validation has failed.  The following minimalistic
+      example demonstrates how the validation errors can be displayed to the user as popup alerts:
+    </para>
+    
+    <programlisting><![CDATA[  function validationCallback(violations) {
+  for (var i = 0; i < violations.length; i++) {
+    alert(violations[i].property + "=" + violations[i].value + " [violation] -> " + violations[i].message);]]></programlisting>
+  </section>
+
+
+
+</chapter>

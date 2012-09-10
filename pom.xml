@@ -34,6 +34,7 @@
         <module>international</module>
         <module>mail</module>
         <module>conversation</module>
+        <module>remoting</module>
     </modules>
 
 </project>
