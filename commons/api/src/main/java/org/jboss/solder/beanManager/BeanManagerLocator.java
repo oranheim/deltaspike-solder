@@ -25,6 +25,7 @@ import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.Extension;
 import javax.inject.Inject;
 
+import org.apache.deltaspike.core.api.provider.BeanManagerProvider;
 import org.jboss.solder.util.Sortable;
 import org.jboss.solder.util.service.ServiceLoader;
 
@@ -80,6 +81,7 @@ public class BeanManagerLocator {
      *          if the BeanManager cannot be resolved
      */
     public BeanManager getBeanManager() {
+    	/*
         if (!lookupPerformed) {
             lookupBeanManager();
         }
@@ -89,6 +91,8 @@ public class BeanManagerLocator {
         }
 
         return beanManager;
+        */
+    	return getLocatingProvider().getBeanManager();
     }
 
     /**
@@ -115,11 +119,13 @@ public class BeanManagerLocator {
      *
      * @return the BeanManagerProvider implementation
      */
-    public BeanManagerProvider getLocatingProvider() {
-        return locatingProvider;
+    public org.apache.deltaspike.core.api.provider.BeanManagerProvider getLocatingProvider() {
+        //return locatingProvider;
+    	return BeanManagerProvider.getInstance();
     }
 
     private synchronized void lookupBeanManager() {
+    	/*
         if (!lookupPerformed) {
             final List<BeanManagerProvider> providers = loadServices();
             Collections.sort(providers, new Sortable.Comparator());
@@ -133,6 +139,9 @@ public class BeanManagerLocator {
             this.providers = providers;
             lookupPerformed = true;
         }
+        */
+    	beanManager = getLocatingProvider().getBeanManager();
+    	lookupPerformed = true;
     }
 
     private List<BeanManagerProvider> loadServices() {

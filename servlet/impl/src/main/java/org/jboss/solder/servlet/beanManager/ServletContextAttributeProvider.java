@@ -45,13 +45,14 @@ public class ServletContextAttributeProvider extends BeanManagerProvider {
     }
 
     public BeanManager getBeanManager() {
-
+    	BeanManager beanManager = BeanManagerProvider.getInstance().getBeanManager();
+    	/*
         if (servletContext.get() != null) {
 
             ServletContext context = servletContext.get();
 
             // the default attribute for the BeanManager
-            BeanManager beanManager = (BeanManager) context.getAttribute(BeanManager.class.getName());
+            BeanManager beanManager = (BeanManager) context.getAttribute(BeanManager.class.getName());            
 
             // also try an attribute used in early versions of Weld 1.1.x
             if (beanManager == null) {
@@ -61,6 +62,7 @@ public class ServletContextAttributeProvider extends BeanManagerProvider {
             return beanManager;
 
         }
+        */
         return null;
     }
 
