@@ -12,3 +12,4 @@ bin
 .project
 .classpath
 target
+generated-source
