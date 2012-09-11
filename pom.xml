@@ -35,6 +35,7 @@
         <module>mail</module>
         <module>conversation</module>
         <module>remoting</module>
+        <module>rest</module>
     </modules>
 
 </project>

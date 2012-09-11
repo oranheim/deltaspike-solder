@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+   "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" []>
+<chapter id="rest.dependencies">
+    <title>Seam REST Dependencies</title>
+
+    <sect1 id="rest.dependencies.transitive">
+        <title>Transitive Dependencies</title>
+
+        <para>
+            The Seam REST module depends on the <ulink url="http://seamframework.org/Seam3/Solder">Seam Solder</ulink> module.
+        </para>
+    </sect1>
+
+    <sect1>
+        <title>Optional dependencies</title>
+
+        <sect2>
+            <title>FreeMarker</title>
+
+            <para>
+                FreeMarker can be used for rendering HTTP responses. For more information on using
+                FreeMarker with Seam REST, refer to
+                <xref linkend="rest.templating.freemarker" />
+            </para>
+
+            <programlisting role="XML"><![CDATA[<dependency>
+	<groupId>org.freemarker</groupId>
+	<artifactId>freemarker</artifactId>
+	<version>${freemarker.version}</version>
+</dependency>]]></programlisting>
+        </sect2>
+        <sect2>
+            <title>Apache Velocity</title>
+
+            <para>
+                Apache Velocity can be used for rendering HTTP responses. For more information on using
+                Velocity with Seam REST, refer to
+                <xref linkend="rest.templating.velocity" />
+            </para>
+
+            <programlisting role="XML"><![CDATA[<dependency>
+	<groupId>org.apache.velocity</groupId>
+	<artifactId>velocity</artifactId>
+	<version>${velocity.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.apache.velocity</groupId>
+	<artifactId>velocity-tools</artifactId>
+	<version>${velocity.tools.version}</version>
+</dependency>]]></programlisting>
+        </sect2>
+        <sect2>
+            <title>RESTEasy</title>
+
+            <para>
+                RESTEasy Client Framework can be used for building clients of RESTful web services.
+                For more information on using RESTEasy Client Framework, refer to
+                <xref linkend="rest.client" />
+            </para>
+
+            <programlisting role="XML"><![CDATA[<dependency>
+	<groupId>org.jboss.resteasy</groupId>
+	<artifactId>resteasy-jaxrs</artifactId>
+	<version>${resteasy.version}</version>
+</dependency>]]></programlisting>
+
+            <note>
+                <para>
+                    Note that RESTEasy is provided on JBoss Application Server 6 and 7 and thus you
+                    do not need to bundle it with the web application.
+				</para>
+            </note>
+        </sect2>
+    </sect1>
+</chapter>
