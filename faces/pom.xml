@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+
+   <parent>
+      <groupId>org.jboss.seam</groupId>
+      <artifactId>seam-parent</artifactId>
+      <version>20ds-SNAPSHOT</version>
+   </parent>
+
+   <artifactId>seam-faces-parent</artifactId>
+   <groupId>org.jboss.seam.faces</groupId>
+   <packaging>pom</packaging>
+   <version>3.5.0-SNAPSHOT</version>
+
+   <name>Seam Faces Module</name>
+   <description>CDI integration and numerous other enhancements for JSF</description>
+   <url>http://seamframework.org/Seam3/FacesModule</url>
+   <inceptionYear>2009</inceptionYear>
+
+   <modules>
+      <module>api</module>
+      <module>impl</module>
+      <module>testsuite</module>
+   </modules>
+
+   <properties>
+      <seam.version>3.5.0-SNAPSHOT</seam.version>
+   </properties>
+
+   <dependencyManagement>
+      <dependencies>
+
+         <dependency>
+            <groupId>org.jboss.seam</groupId>
+            <artifactId>seam-bom</artifactId>
+            <version>${seam.version}</version>
+            <scope>import</scope>
+            <type>pom</type>
+         </dependency>
+
+         <!-- Override org.jboss.seam:seam-bom for submodules -->
+         <dependency>
+            <groupId>org.jboss.seam.faces</groupId>
+            <artifactId>seam-faces-api</artifactId>
+            <version>${project.version}</version>
+             <scope>compile</scope>
+         </dependency>
+
+         <dependency>
+            <groupId>org.jboss.seam.faces</groupId>
+            <artifactId>seam-faces</artifactId>
+            <version>${project.version}</version>
+             <scope>runtime</scope>
+         </dependency>
+
+      </dependencies>
+   </dependencyManagement>
+
+   <profiles>
+      <profile>
+         <id>distribution</id>
+         <activation>
+            <property>
+               <name>release</name>
+            </property>
+         </activation>
+         <modules>
+            <module>docs</module>
+            <module>examples/short-ly</module>
+            <module>examples/viewconfig</module>
+            <module>dist</module>
+         </modules>
+      </profile>
+   </profiles>
+
+   <scm>
+      <connection>scm:git:git://github.com/seam/faces.git</connection>
+      <developerConnection>scm:git:git@github.com:seam/faces.git</developerConnection>
+      <url>http://github.com/seam/faces</url>
+   </scm>
+
+   <issueManagement>
+      <system>JIRA</system>
+      <url>http://issues.jboss.org/browse/SEAMFACES</url>
+   </issueManagement>
+
+   <ciManagement>
+      <system>Hudson</system>
+      <url>http://hudson.jboss.org/hudson/view/Seam/job/Seam-3.X-faces-CI</url>
+   </ciManagement>
+
+   <developers>
+       <developer>
+         <name>Brian Leathem</name>
+         <email>bleathem@gmail.com</email>
+         <url>http://blog.bleathem.ca</url>
+         <organization>TRIUMF</organization>
+         <organizationUrl>http://www.triumf.ca</organizationUrl>
+         <timezone>PST</timezone>
+         <roles>
+            <role>Project Lead</role>
+         </roles>
+      </developer>
+      <developer>
+         <name>Lincoln Baxter, III</name>
+         <email>lincolnbaxter@gmail.com</email>
+         <url>http://ocpsoft.com</url>
+         <organization>JBoss, by Red Hat</organization>
+         <organizationUrl>http://jboss.org</organizationUrl>
+         <timezone>EST</timezone>
+         <roles>
+            <role>Committer</role>
+         </roles>
+      </developer>
+      <developer>
+         <name>Dan Allen</name>
+         <organization>JBoss, by Red Hat</organization>
+         <organizationUrl>http://jboss.org</organizationUrl>
+         <timezone>EST</timezone>
+         <roles>
+            <role>Committer</role>
+         </roles>
+      </developer>
+      <developer>
+         <name>Nicklas Karlsson</name>
+         <timezone>GMT+2</timezone>
+         <roles>
+            <role>Committer</role>
+         </roles>
+      </developer>
+   </developers>
+</project>

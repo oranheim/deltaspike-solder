@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+
+   <parent>
+      <artifactId>seam-faces-parent</artifactId>
+      <groupId>org.jboss.seam.faces</groupId>
+      <version>3.5.0-SNAPSHOT</version>
+      <relativePath>../pom.xml</relativePath>
+   </parent>
+
+   <artifactId>seam-faces</artifactId>
+
+   <packaging>jar</packaging>
+   <name>Seam Faces Implementation</name>
+   <!-- url required for JAR Manifest -->
+   <url>${project.parent.url}</url>
+
+   <dependencies>
+      <dependency>
+         <groupId>com.sun.faces</groupId>
+         <artifactId>jsf-api</artifactId>
+         <version>2.0.4-b07</version>
+         <scope>provided</scope>
+      </dependency>
+
+      <dependency>
+         <artifactId>seam-faces-api</artifactId>
+         <groupId>org.jboss.seam.faces</groupId>
+      </dependency>
+
+      <dependency>
+         <groupId>org.jboss.solder</groupId>
+         <artifactId>solder-impl</artifactId>
+         <scope>compile</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>org.jboss.seam.international</groupId>
+         <artifactId>seam-international-api</artifactId>
+      </dependency>
+
+      <!-- 
+      <dependency>
+         <groupId>org.jboss.seam.persistence</groupId>
+         <artifactId>seam-persistence-api</artifactId>
+         <scope>provided</scope>
+         <optional>true</optional>
+      </dependency>
+
+      <dependency>
+         <groupId>org.jboss.seam.transaction</groupId>
+         <artifactId>seam-transaction</artifactId>
+          <scope>provided</scope>
+          <optional>true</optional>
+      </dependency>
+      -->
+
+      <dependency>
+         <groupId>org.jboss.seam.security</groupId>
+         <artifactId>seam-security-api</artifactId>
+         <scope>provided</scope>
+         <optional>true</optional>
+      </dependency>
+
+       <dependency>
+         <groupId>com.ocpsoft</groupId>
+         <artifactId>prettyfaces-jsf2</artifactId>
+         <scope>provided</scope>
+         <optional>true</optional>
+      </dependency>
+
+      <dependency>
+         <groupId>org.jboss.spec.javax.interceptor</groupId>
+         <artifactId>jboss-interceptors-api_1.1_spec</artifactId>
+         <scope>provided</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>org.jboss.spec.javax.servlet</groupId>
+         <artifactId>jboss-servlet-api_3.0_spec</artifactId>
+         <scope>provided</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>org.jboss.spec.javax.transaction</groupId>
+         <artifactId>jboss-transaction-api_1.1_spec</artifactId>
+         <scope>provided</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>org.jboss.spec.javax.el</groupId>
+         <artifactId>jboss-el-api_2.2_spec</artifactId>
+         <scope>provided</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>javax.enterprise</groupId>
+         <artifactId>cdi-api</artifactId>
+         <scope>provided</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>junit</groupId>
+         <artifactId>junit</artifactId>
+         <scope>test</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>org.mockito</groupId>
+         <artifactId>mockito-core</artifactId>
+         <version>1.8.5</version>
+         <scope>test</scope>
+      </dependency>      
+
+   </dependencies>
+
+</project>

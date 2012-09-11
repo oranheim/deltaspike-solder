@@ -36,6 +36,8 @@
         <module>conversation</module>
         <module>remoting</module>
         <module>rest</module>
+        <module>security</module>
+        <module>faces</module>
     </modules>
 
 </project>
