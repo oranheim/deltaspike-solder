@@ -1,0 +1,212 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+
+   <parent>
+      <groupId>org.jboss.seam.security</groupId>
+      <artifactId>seam-security-parent</artifactId>
+      <version>3.5.0-SNAPSHOT</version>
+      <relativePath>../pom.xml</relativePath>
+   </parent>
+
+   <groupId>org.jboss.seam.security</groupId>
+   <artifactId>seam-security-external</artifactId>
+   <packaging>jar</packaging>
+   <name>Seam Security External Authentication Services</name>
+   <url>${project.parent.url}</url>
+
+   <build>
+      <finalName>seam-security-external</finalName>
+      <plugins>
+         <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>jaxb2-maven-plugin</artifactId>
+            <version>1.3</version>
+            <executions>
+
+               <execution>
+                  <id>jaxb-saml</id>
+                  <configuration>
+                     <schemaDirectory>${basedir}/src/main/resources/schema/samlv2</schemaDirectory>
+                     <outputDirectory>${basedir}/src/main/generated-source</outputDirectory>
+                     <clearOutputDir>true</clearOutputDir>
+                     <staleFile>${project.build.directory}/classes/.staleFlag_saml</staleFile>
+                     <bindingFiles>samlv2-bindings.xjb</bindingFiles>
+                     <catalog>${basedir}/src/main/resources/schema/catalog/catalog.xml</catalog>
+                     <nv>true</nv>
+                  </configuration>
+                  <goals>
+                     <goal>xjc</goal>
+                  </goals>
+               </execution>
+
+               <execution>
+                  <id>jaxb-xrds</id>
+                  <configuration>
+                     <schemaDirectory>${basedir}/src/main/resources/schema/xrds</schemaDirectory>
+                     <packageName>org.jboss.seam.security.external.jaxb.xrds</packageName>
+                     <outputDirectory>${basedir}/src/main/generated-source</outputDirectory>
+                     <clearOutputDir>false</clearOutputDir>
+                     <staleFile>${project.build.directory}/classes/.staleFlag_xrds</staleFile>
+                     <bindingFiles>xrds-bindings.xjb</bindingFiles>
+                  </configuration>
+                  <goals>
+                     <goal>xjc</goal>
+                  </goals>
+               </execution>
+
+            </executions>
+         </plugin>
+
+         <!-- Add the generated-source directory to the source directories 
+              (this way it will show up in Eclipse if you use m2eclipse) -->
+         <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>build-helper-maven-plugin</artifactId>
+            <executions>
+               <execution>
+                  <id>add-source</id>
+                  <phase>generate-sources</phase>
+                  <goals>
+                     <goal>add-source</goal>
+                  </goals>
+                  <configuration>
+                     <sources>
+                        <source>${basedir}/src/main/generated-source</source>
+                     </sources>
+                  </configuration>
+               </execution>
+            </executions>
+         </plugin>
+
+         <!-- Clean out the generated-source directory when the clean target is run -->
+         <plugin>
+            <artifactId>maven-clean-plugin</artifactId>
+            <configuration>
+               <filesets>
+                  <fileset>
+                     <directory>${basedir}/src/main/generated-source</directory>
+                     <includes>
+                        <include>**/*.java</include>
+                     </includes>
+                  </fileset>
+               </filesets>
+            </configuration>
+         </plugin>
+
+      </plugins>
+   </build>
+
+   <dependencies>
+
+      <dependency>
+         <groupId>org.jboss.seam.security</groupId>
+         <artifactId>seam-security</artifactId>
+      </dependency>
+
+      <dependency>
+         <groupId>org.jboss.solder</groupId>
+         <artifactId>solder-impl</artifactId>
+      </dependency>
+
+      <dependency>
+         <groupId>javax.validation</groupId>
+         <artifactId>validation-api</artifactId>
+         <scope>provided</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>javax.enterprise</groupId>
+         <artifactId>cdi-api</artifactId>
+         <scope>provided</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>org.jboss.spec.javax.interceptor</groupId>
+         <artifactId>jboss-interceptors-api_1.1_spec</artifactId>
+         <scope>provided</scope>
+      </dependency>
+
+      <dependency>
+         <!-- Required until the Servlet 3.0 API can be resolved in Central -->
+         <groupId>org.jboss.spec.javax.servlet</groupId>
+         <artifactId>jboss-servlet-api_3.0_spec</artifactId>
+         <scope>provided</scope>
+      </dependency>
+
+      <dependency>
+         <!-- This is necessary until a new JSF-API is published to central -->
+         <groupId>javax.faces</groupId>
+         <artifactId>jsf-api</artifactId>
+         <scope>provided</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>org.openid4java</groupId>
+         <artifactId>openid4java-consumer</artifactId>
+         <version>0.9.6</version>
+         <type>pom</type>
+         <exclusions>
+            <exclusion>
+               <groupId>xerces</groupId>
+               <artifactId>xercesImpl</artifactId>
+            </exclusion>
+         </exclusions>
+      </dependency>
+
+      <!--
+         We need the JSR 105 API and implementation (for XML digital
+         signatures). This is part of JDK6, but Seam 3 is required to
+         compile with JDK5 as well.
+      -->
+      <dependency>
+         <groupId>org.apache</groupId>
+         <artifactId>xmlsec</artifactId>
+         <version>1.4.3</version>
+         <optional>true</optional>
+      </dependency>
+
+      <dependency>
+         <groupId>junit</groupId>
+         <artifactId>junit</artifactId>
+         <scope>test</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>com.sun.xml.bind</groupId>
+         <artifactId>jaxb-impl</artifactId>
+         <version>2.1.9</version>
+         <scope>provided</scope>
+      </dependency>
+
+      <!-- Needed by openid4java -->
+      <dependency>
+         <groupId>commons-httpclient</groupId>
+         <artifactId>commons-httpclient</artifactId>
+         <version>3.1</version>
+      </dependency>
+
+      <!-- Needed by openid4java -->
+      <dependency>
+         <groupId>nekohtml</groupId>
+         <artifactId>nekohtml</artifactId>
+         <version>1.9.12</version>
+      </dependency>
+
+       <!-- 
+      <dependency>
+          <groupId>org.jboss.seam.social</groupId>
+          <artifactId>seam-social</artifactId>
+          <version>${project.version}</version>
+          <scope>provided</scope>
+       </dependency>
+       
+       <dependency>
+          <groupId>org.jboss.seam.social</groupId>
+          <artifactId>seam-social-api</artifactId>
+          <version>${project.version}</version>
+          <scope>provided</scope>
+       </dependency>
+       -->
+   </dependencies>
+
+</project>

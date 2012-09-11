@@ -1,0 +1,19 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:form>
+        <h:commandLink value="Login" action="/Login.xhtml"
+                       disabled="#{samlIdentity.loggedIn}"/> |
+        <h:commandLink value="Configuration" action="/Configuration.xhtml"/> |
+        <h:commandLink value="Session Management" action="/SessionManagement.xhtml"
+                       disabled="#{!samlIdentity.loggedIn}"/> |
+        <h:commandLink value="Local Logout" action="#{samlIdentity.localLogout}"
+                       disabled="#{!samlIdentity.loggedIn}"/> |
+        <h:commandLink value="Global Logout" action="#{samlIdentity.globalLogout}"
+                       disabled="#{!samlIdentity.loggedIn or samlIdentity.samlIdpSession == null}"/>
+    </h:form>
+
+</ui:composition>
