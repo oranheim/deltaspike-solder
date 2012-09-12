@@ -40,7 +40,8 @@ import org.jboss.solder.servlet.support.ServletLogger;
  *
  * @author <a href="http://community.jboss.org/people/dan.j.allen">Dan Allen</a>
  */
-@Requires({"org.jboss.solder.exception.control.extension.CatchExtension", "javax.servlet.Servlet"})
+//@Requires({"org.jboss.solder.exception.control.extension.CatchExtension", "javax.servlet.Servlet"})
+@Requires({"org.apache.deltaspike.core.impl.exception.control.extension.ExceptionControlExtension", "javax.servlet.Servlet"})
 public class CatchExceptionFilter extends BeanManagerAware implements Filter {
     private transient ServletLogger log = Logger.getMessageLogger(ServletLogger.class, ServletLogger.CATEGORY);
 

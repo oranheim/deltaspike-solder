@@ -20,6 +20,7 @@ import javax.enterprise.inject.spi.BeanManager;
 import javax.servlet.ServletContext;
 
 //import org.jboss.solder.beanManager.BeanManagerProvider;
+import org.jboss.solder.beanManager.BeanManagerLocator;
 import org.jboss.solder.core.Requires;
 
 // was interface, changed to class and extent
@@ -44,8 +45,8 @@ public class ServletContextAttributeProvider extends BeanManagerProvider {
         servletContext.set(sc);
     }
 
-    public BeanManager getBeanManager() {
-    	BeanManager beanManager = BeanManagerProvider.getInstance().getBeanManager();
+    public BeanManager getBeanManager() {    	
+    	BeanManager beanManager = new BeanManagerLocator().getBeanManager();
     	/*
         if (servletContext.get() != null) {
 
@@ -63,7 +64,7 @@ public class ServletContextAttributeProvider extends BeanManagerProvider {
 
         }
         */
-        return null;
+        return beanManager;
     }
 
     public int getPrecedence() {
