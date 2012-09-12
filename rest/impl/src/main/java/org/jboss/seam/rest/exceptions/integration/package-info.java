@@ -1,3 +1,3 @@
-@Requires("org.jboss.solder.exception.control.extension.CatchExtension") package org.jboss.seam.rest.exceptions.integration;
+@Requires("org.apache.deltaspike.core.impl.exception.control.extension.ExceptionControlExtension") package org.jboss.seam.rest.exceptions.integration;
 
 import org.jboss.solder.core.Requires;

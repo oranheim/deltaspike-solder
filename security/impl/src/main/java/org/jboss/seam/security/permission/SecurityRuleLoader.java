@@ -15,6 +15,7 @@ import org.drools.builder.KnowledgeBuilderErrors;
 import org.drools.builder.KnowledgeBuilderFactory;
 import org.drools.builder.ResourceType;
 import org.drools.io.ResourceFactory;
+import org.jboss.solder.core.Requires;
 import org.jboss.solder.logging.Logger;
 import org.jboss.solder.resourceLoader.Resource;
 
@@ -23,6 +24,7 @@ import org.jboss.solder.resourceLoader.Resource;
  *
  * @author Shane Bryzak
  */
+@Requires("org.drools.KnowledgeBase")
 @ApplicationScoped
 public class SecurityRuleLoader {    
     @Inject Logger log;

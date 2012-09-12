@@ -24,11 +24,11 @@ import org.jboss.solder.servlet.event.literal.StartedLiteral;
 @Requires("javax.servlet.Servlet")
 public class ServletEventBridgeServlet extends AbstractServletEventBridge implements Servlet {
     private transient ServletConfig config;
-
+    
     public void init(ServletConfig config) throws ServletException {
         this.config = config;
         fireWebApplicationEvent(StartedLiteral.INSTANCE);
-        // fireEvent(config.getServletContext(), StartedLiteral.INSTANCE);
+        // fireEvent(config.getServletContext(), StartedLiteral.INSTANCE);        
     }
 
     public void destroy() {
