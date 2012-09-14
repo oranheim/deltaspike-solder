@@ -16,6 +16,8 @@
  */
 package org.jboss.solder.bean.generic;
 
+import static org.jboss.solder.reflection.AnnotationInspector.getAnnotations;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Field;
@@ -57,30 +59,22 @@ import javax.enterprise.inject.spi.ProcessProducerField;
 import javax.enterprise.inject.spi.ProcessProducerMethod;
 import javax.inject.Inject;
 
-//import org.jboss.solder.bean.BeanBuilder;
 import org.apache.deltaspike.core.util.bean.BeanBuilder;
-import org.apache.deltaspike.core.util.metadata.builder.AnnotatedTypeBuilder;
 import org.apache.deltaspike.core.util.metadata.builder.ContextualLifecycle;
-import org.apache.deltaspike.core.util.metadata.builder.SolderAnnotatedTypeBuilder;
 import org.jboss.solder.bean.Beans;
-//import org.jboss.solder.bean.ContextualLifecycle;
 import org.jboss.solder.bean.defaultbean.DefaultBeanInformation;
 import org.jboss.solder.literal.AnyLiteral;
 import org.jboss.solder.literal.DefaultLiteral;
 import org.jboss.solder.reflection.Synthetic;
 import org.jboss.solder.reflection.annotated.AnnotationRedefiner;
 import org.jboss.solder.reflection.annotated.RedefinitionContext;
-//import org.jboss.solder.reflection.annotated.AnnotatedTypeBuilder;
-//import org.jboss.solder.reflection.annotated.AnnotationRedefiner;
-//import org.jboss.solder.reflection.annotated.RedefinitionContext;
+import org.jboss.solder.reflection.annotated.SolderAnnotatedTypeBuilder;
 import org.jboss.solder.unwraps.Unwraps;
 import org.jboss.solder.unwraps.UnwrapsProducerBean;
 import org.jboss.solder.util.collections.Arrays2;
 import org.jboss.solder.util.collections.Multimaps;
 import org.jboss.solder.util.collections.SetMultimap;
 import org.jboss.solder.util.collections.Supplier;
-
-import static org.jboss.solder.reflection.AnnotationInspector.getAnnotations;
 
 /**
  * Extension that wires in Generic Beans
@@ -279,7 +273,7 @@ public class GenericBeanExtension implements Extension {
                 }
             }
 
-            final SolderAnnotatedTypeBuilder<X> builder = (SolderAnnotatedTypeBuilder<X>) new SolderAnnotatedTypeBuilder<X>().readFromType(type);
+            final SolderAnnotatedTypeBuilder<X> builder = new SolderAnnotatedTypeBuilder<X>().readFromType(type);
             builder.addToClass(genericBeanQualifier);
             builder.redefine(Inject.class, new AnnotationRedefiner<Inject>() {
 

@@ -106,6 +106,18 @@
             <url>http://www.apache.org/licenses/LICENSE-2.0</url>
         </license>
     </licenses>
+
+    <modules>
+        <module>test/glassfish-embedded-3.1</module>
+        <module>test/glassfish-remote-3.1</module>
+        <module>test/jbossas-managed-6</module>
+        <module>test/jbossas-managed-7</module>
+        <module>test/jbossas-remote-6</module>
+        <module>test/jbossas-remote-7</module>
+<!--         <module>test/openwebbeans-embedded-1</module> -->
+        <module>test/weld-ee-embedded-1.1</module>
+        <module>test/openshift-express</module>
+    </modules>    
     
     <dependencyManagement>
         <dependencies>

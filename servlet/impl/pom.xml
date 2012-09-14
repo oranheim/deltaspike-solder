@@ -16,10 +16,12 @@
 	<url>http://seamframework.org</url>
 	<packaging>jar</packaging>
 	
+    <!-- 
 	<properties>
 		<arquillian.weld.version>1.0.0.CR3</arquillian.weld.version>
 		<container.bom.version>19</container.bom.version>
 	</properties>
+    -->
 
 	<dependencies>
 		<dependency>
@@ -104,13 +106,12 @@
                     <scope>test</scope>
                 </dependency>
  
-                <!-- EL impl needed for ElTest
+                <!-- EL impl needed for ElTest -->
                 <dependency>
                     <groupId>org.glassfish.web</groupId>
                     <artifactId>el-impl</artifactId>
                     <scope>test</scope>
                 </dependency>
-                 -->
 
             </dependencies>
 
