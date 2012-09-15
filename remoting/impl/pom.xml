@@ -25,21 +25,18 @@
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
 			<scope>provided</scope>
-            <version>1.0.0.GA</version>
 		</dependency>
 
 		<dependency>
 			<groupId>javax.enterprise</groupId>
 			<artifactId>cdi-api</artifactId>
 			<scope>provided</scope>
-            <version>1.0-SP4</version>
 		</dependency>
 
 		<dependency>
 			<groupId>dom4j</groupId>
 			<artifactId>dom4j</artifactId>
 			<scope>provided</scope>
-            <version>1.6.1</version>
 		</dependency>
 
 		<dependency>
@@ -47,27 +44,23 @@
 			<groupId>org.jboss.spec.javax.servlet</groupId>
 			<artifactId>jboss-servlet-api_3.0_spec</artifactId>
 			<scope>provided</scope>
-            <version>1.0.2.Final</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jboss.solder</groupId>
 			<artifactId>solder-impl</artifactId>
 			<scope>compile</scope>
-            <version>${solder.version}</version>
 		</dependency>
 
 		<dependency>
 		   <groupId>org.jboss.seam.international</groupId>
 		   <artifactId>seam-international</artifactId>
 		   <optional>true</optional>
-           <version>${project.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jboss.seam.conversation</groupId>
 			<artifactId>seam-conversation-spi</artifactId>
-            <version>${project.version}</version>
 		</dependency>
 	</dependencies>
 
