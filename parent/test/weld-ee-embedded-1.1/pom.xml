@@ -14,6 +14,19 @@
    <name>Weld EE Embedded Container BOM</name>
 
    <dependencies>
+
+    <!-- Dependencies for Java-SE -->
+    <dependency>
+        <groupId>org.apache.deltaspike.cdictrl</groupId>
+        <artifactId>deltaspike-cdictrl-api</artifactId>
+        <scope>compile</scope>
+    </dependency>
+
+    <dependency>
+        <groupId>org.apache.deltaspike.cdictrl</groupId>
+        <artifactId>deltaspike-cdictrl-weld</artifactId>
+        <scope>runtime</scope>
+    </dependency>
    
       <dependency>
          <groupId>org.jboss.arquillian.container</groupId>
