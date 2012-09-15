@@ -1,0 +1,120 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+   <modelVersion>4.0.0</modelVersion>
+
+   <groupId>org.jboss.seam.cron</groupId>
+   <artifactId>seam-cron-reference-guide</artifactId>
+   <version>3.5.0-SNAPSHOT</version>
+   <packaging>jdocbook</packaging>
+   <name>Seam Cron Module Reference Guide</name>
+
+   <parent>
+      <groupId>org.jboss.seam.cron</groupId>
+      <artifactId>seam-cron-parent</artifactId>
+      <version>3.5.0-SNAPSHOT</version>
+      <relativePath>../../pom.xml</relativePath>
+   </parent>
+
+   <properties>
+      <pdf.name>${project.artifactId}.pdf</pdf.name>
+   </properties>
+
+   <build>
+        <pluginManagement>
+             <plugins>
+                <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+                <plugin>
+                   <groupId>org.eclipse.m2e</groupId>
+                   <artifactId>lifecycle-mapping</artifactId>
+                   <version>1.0.0</version>
+                   <configuration>
+                      <lifecycleMappingMetadata>
+                         <pluginExecutions>
+                            <pluginExecution>
+                               <pluginExecutionFilter>
+                                  <groupId>org.apache.maven.plugins</groupId>
+                                  <artifactId>
+                                     maven-antrun-plugin
+                                  </artifactId>
+                                  <versionRange>[1.6,)</versionRange>
+                                  <goals>
+                                     <goal>run</goal>
+                                  </goals>
+                               </pluginExecutionFilter>
+                               <action>
+                                  <ignore />
+                               </action>
+                            </pluginExecution>
+                            <pluginExecution>
+                               <pluginExecutionFilter>
+                                  <groupId>org.jboss.maven.plugins</groupId>
+                                  <artifactId>
+                                     maven-jdocbook-plugin
+                                  </artifactId>
+                                  <versionRange>[2.3.5,)</versionRange>
+                                  <goals>
+                                     <goal>generate</goal>
+                                     <goal>resources</goal>
+                                  </goals>
+                               </pluginExecutionFilter>
+                               <action>
+                                  <ignore />
+                               </action>
+                            </pluginExecution>
+                         </pluginExecutions>
+                      </lifecycleMappingMetadata>
+                   </configuration>
+                </plugin>
+             </plugins>
+        </pluginManagement>
+   
+      <plugins>
+         <plugin>
+            <groupId>org.jboss.maven.plugins</groupId>
+            <artifactId>maven-jdocbook-plugin</artifactId>
+         </plugin>
+         <!-- Attach docs as a war so dist can retrieve them -->
+         <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>build-helper-maven-plugin</artifactId>
+            <executions>
+               <execution>
+                  <id>attach-zip</id>
+                  <phase>package</phase>
+                  <goals>
+                     <goal>attach-artifact</goal>
+                  </goals>
+                  <configuration>
+                     <artifacts>
+                        <artifact>
+                           <file>${project.build.outputDirectory}/${project.artifactId}-${project.version}.war</file>
+                           <type>war</type>
+                        </artifact>
+                     </artifacts>
+                  </configuration>
+               </execution>
+            </executions>
+         </plugin>
+      </plugins>
+   </build>
+
+   <profiles>
+      <profile>
+         <id>distribution</id>
+         <activation>
+            <property>
+               <name>release</name>
+            </property>
+         </activation>
+         <build>
+            <plugins>
+               <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-assembly-plugin</artifactId>
+               </plugin>
+            </plugins>
+         </build>
+      </profile>
+   </profiles>
+
+</project>

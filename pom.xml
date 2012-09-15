@@ -38,6 +38,8 @@
         <module>rest</module>
         <module>security</module>
         <module>faces</module>
+        
+        <module>cron</module>
     </modules>
 
 </project>

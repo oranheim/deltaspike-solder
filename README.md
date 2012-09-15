@@ -56,6 +56,7 @@ Disclaimer
 * Seam Rest was forked on 2012-09-10 22:45 GMT+1
 * Seam Faces was forked on 2012-09-11 20:41 GMT+1 (transaction listener is disabled) 
 * Seam Security was forked on 2012-09-11 20:55 GMT+1 (deferred OAuth is disabled)
+* Seam Cron was forked on 2012-09-15 01:08 GMT+1
 
 Enjoy!
 
