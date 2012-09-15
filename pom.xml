@@ -19,13 +19,27 @@
         </license>
     </licenses>
 
+    <developers>
+        <developer>
+            <name>Ove Ranheim</name>
+            <email>oranheim@gmail.com</email>
+            <url>http://github.com/oranheim</url>
+            <organization>Musific</organization>
+            <organizationUrl>http://www.musific.com</organizationUrl>
+            <timezone>CET</timezone>
+            <roles>
+                <role>Project Lead</role>
+            </roles>
+        </developer>
+    </developers>    
+
     <modules>
         <module>parent</module>
         <module>bom</module>
+        
         <module>logging-internal</module>
-
-        <module>commons</module>
         <module>logging</module>
+        <module>commons</module>
         <module>tooling</module>
         <module>properties</module>
         <module>servlet</module>

@@ -93,7 +93,7 @@
 			
 			<dependency>
 				<groupId>org.jboss.solder</groupId>
-				<artifactId>solder-logging-internal</artifactId>
+				<artifactId>solder-logging</artifactId>
 				<version>${solder.version}</version>
 			</dependency>
 			
