@@ -40,6 +40,7 @@
         <module>logging-internal</module>
         <module>logging</module>
         <module>commons</module>
+        <module>generics</module>
         <module>tooling</module>
         <module>properties</module>
         <module>servlet</module>
