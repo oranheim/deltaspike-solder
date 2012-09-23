@@ -33,13 +33,13 @@
 
 			<dependency>
 				<groupId>org.jboss.solder</groupId>
-				<artifactId>solder-commons-api</artifactId>
+				<artifactId>solder-generics-api</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>org.jboss.solder</groupId>
-				<artifactId>solder-commons-impl</artifactId>
+				<artifactId>solder-generics-impl</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 		</dependencies>

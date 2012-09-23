@@ -26,24 +26,20 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.jboss.solder</groupId>
-			<artifactId>solder-commons-api</artifactId>
-			<version>${project.version}</version>
+			<artifactId>solder-generics-api</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.solder</groupId>
 			<artifactId>solder-logging-api</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.solder</groupId>
-			<artifactId>solder-properties-impl</artifactId>
-			<version>${project.version}</version>
+			<artifactId>solder-commons-impl</artifactId>
 		</dependency>
 
 		<dependency>
 			<groupId>org.javassist</groupId>
 			<artifactId>javassist</artifactId>
-			<version>3.13.0-GA</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -81,7 +77,6 @@
                 <dependency>
                     <groupId>org.jboss.seam.test</groupId>
                     <artifactId>weld-ee-embedded-1.1</artifactId>
-                    <version>${container.bom.version}</version>
                     <type>pom</type>
                     <scope>test</scope>
                 </dependency>
@@ -323,7 +318,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.4</version>
 				<executions>
 					<execution>
 						<goals>

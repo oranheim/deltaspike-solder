@@ -51,6 +51,18 @@
 			
 			<dependency>
 				<groupId>org.jboss.solder</groupId>
+				<artifactId>solder-generics-api</artifactId>
+				<version>${solder.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.jboss.solder</groupId>
+				<artifactId>solder-generics-impl</artifactId>
+				<version>${solder.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.jboss.solder</groupId>
 				<artifactId>solder-properties-api</artifactId>
 				<version>${solder.version}</version>
 			</dependency>

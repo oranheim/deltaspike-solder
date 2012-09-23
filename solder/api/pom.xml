@@ -21,6 +21,11 @@
 			<groupId>org.jboss.solder</groupId>
 			<artifactId>solder-commons-api</artifactId>
 		</dependency>
+        
+		<dependency>
+			<groupId>org.jboss.solder</groupId>
+			<artifactId>solder-generics-api</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.jboss.solder</groupId>

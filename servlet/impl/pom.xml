@@ -38,6 +38,18 @@
 
 		<dependency>
 			<groupId>org.jboss.solder</groupId>
+			<artifactId>solder-generics-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.solder</groupId>
+			<artifactId>solder-generics-impl</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.solder</groupId>
 			<artifactId>solder-servlet-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>

@@ -1,4 +1,2 @@
 org.jboss.solder.core.CoreExtension
 org.jboss.solder.unwraps.UnwrapsExtension
-org.jboss.solder.bean.generic.GenericBeanExtension
-org.jboss.solder.bean.defaultbean.DefaultBeanExtension

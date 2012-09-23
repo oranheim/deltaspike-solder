@@ -20,7 +20,11 @@
 		<dependency>
 			<groupId>org.jboss.solder</groupId>
 			<artifactId>solder-logging-api</artifactId>
-			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.solder</groupId>
+			<artifactId>solder-generics-api</artifactId>
+            <version>${project.version}</version>
 		</dependency>
 	</dependencies>
 
