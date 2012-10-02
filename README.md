@@ -17,7 +17,7 @@ Build
 1. cd parent
 2. mvn clean install
 3. cd ..
-4. mvn clean install -DskipTests
+4. mvn clean install -DskipTests -s settings.xml
 
 
 See if it works
